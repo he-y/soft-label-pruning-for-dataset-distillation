@@ -1,0 +1,34 @@
+common:
+  basic:
+    dataset: imagenet1k
+    batch_size: 128
+    epochs: 300
+    workers: 8
+  
+relabel:
+  basic:
+    model: resnet18
+    fkd_seed: 42
+    input_size: 224
+    min_scale_crops: 0.08
+    max_scale_crops: 1
+    mode: fkd_save
+    mix_type: cutmix
+  
+  store_true:
+    - use_fp16
+
+validate:
+  basic:
+    gradient_accumulation_steps: 1
+    mix_type: cutmix
+    temperature: 20
+
+  store_true:
+    - cos
+
+  path:
+    val_dir: #TODO [CHANGE PATH TO YOUR OWN IMAGENET VALIDATION SET]
+
+  aim: 
+    tag_name: LPLD_in1k

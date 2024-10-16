@@ -1,0 +1,44 @@
+common:
+  basic:
+    dataset: imagenet21k
+    batch_size: 32
+    epochs: 300
+    workers: 8
+    num_classes: 10450  # imagenet-21K-P
+  
+  path:
+    teacher_ckpt: ../recover/model_with_class_bn/resnet18_21k_0.pth
+  
+relabel:
+  basic:
+    model: resnet18
+    fkd_seed: 42
+    input_size: 224
+    min_scale_crops: 0.08
+    max_scale_crops: 1
+    mode: fkd_save
+    mix_type: None # None means `cutout` is being used 
+  
+  store_true:
+    - use_fp16
+
+validate:
+  basic:
+    gradient_accumulation_steps: 1
+    mix_type: None 
+    temperature: 20
+
+    adamw_lr: 0.002
+    adamw_decay: 0.01
+
+    label_smoothing: 0.2
+
+  store_true:
+    - cos
+
+  path:
+    val_dir: #TODO [CHANGE PATH TO YOUR OWN IMAGENET21K VALIDATION SET]
+    dd
+
+  aim: 
+    tag_name: LPLD_in21k

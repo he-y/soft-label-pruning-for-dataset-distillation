@@ -1,0 +1,39 @@
+common:
+  basic:
+    dataset: tiny
+    batch_size: 64
+    workers: 8
+    epochs: 100
+
+relabel:
+  basic:
+    model: resnet18
+    fkd_seed: 42
+    input_size: 64
+    min_scale_crops: 0.08
+    max_scale_crops: 1
+    mode: fkd_save
+  
+  store_true:
+    - use_fp16
+  
+
+validate:
+  basic:
+    # model: resnet18
+    gradient_accumulation_steps: 1
+    temperature: 20
+    
+    learning_rate: 0.2
+    momentum: 0.9
+    weight_decay: 0.0001  # 1e-4
+
+  store_true:
+    - cos
+    - sgd
+
+  path:
+    val_dir: ../recover/tiny_forward/data/tiny-imagenet-200/val
+
+  aim: 
+    tag_name: LPLD_tiny

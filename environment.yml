@@ -1,0 +1,19 @@
+name: lpld
+channels:
+  - defaults
+dependencies:
+  - python=3.9
+  - pip:
+    # PyTorch (GPU environment)
+    - torch
+    - torchvision
+    - torchaudio
+    # tools
+    - maplotlib
+    - plotly
+    - pyyaml
+    - pandas
+    - numpy
+    - ema_pytorch
+    # experiment tracking (optional)
+    - aim
